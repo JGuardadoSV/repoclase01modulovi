@@ -6,7 +6,14 @@ const [usuarios, setUsuarios] = React.useState([])
 
 useEffect(() => {
 
-    fetch('http://localhost:3000/usuarios')
+    fetch('http://localhost:3000/usuarios',{
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json',
+            Authorization: "Bearer "+ localStorage.getItem('token')
+        }
+    }
+    )
     .then(response => response.json())
     .then(data => setUsuarios(data))
     .catch (error => console.log(error))

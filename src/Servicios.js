@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Inicio from "./Inicio";
 
 function Servicios() {
+
+  //Login Data
+  const [email, setEmail] = useState('')
+  const [clave, setClave] = useState('')
 
   const usuario=
 {
@@ -24,9 +28,26 @@ function FEnviar  () {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
+  }).catch((error) => {
+    console.error("Error:", error);
   })
 
 
+}
+
+  async function FAutenticar(e){
+  e.preventDefault()
+  const datos = { "email":email, "clave":clave};
+  //POST localhost:3000/auth/login
+  await fetch("http://localhost:3000/auth/login", {
+    method: "POST",
+    body: JSON.stringify(datos),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+  })
+  .then(async response => localStorage.setItem("token",await response.text()))
+  
 }
 
   return (
@@ -34,16 +55,19 @@ function FEnviar  () {
 
       <button className="btn btn-primary" onClick={FEnviar}>Enviar</button>
 
-      <form>
+      <form id="LoginForm" onSubmit={FAutenticar}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
             EMAIL
           </label>
           <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             type="email"
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            required
           />
         </div>
         <div class="mb-3">
@@ -51,14 +75,17 @@ function FEnviar  () {
             CLAVE
           </label>
           <input
+          onChange={(e) => setClave(e.target.value)}
+            value={clave}
             type="password"
             class="form-control"
             id="exampleInputPassword1"
+            required
           />
         </div>
 
         <button type="submit" class="btn btn-primary">
-          Registrar
+          Login
         </button>
       </form>
     </div>

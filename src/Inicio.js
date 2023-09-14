@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function Inicio() {
+    const navigate = useNavigate();
 
+    if (!localStorage.getItem('token')) {
+        navigate('/login');
+    }
 const [usuarios, setUsuarios] = React.useState([])
 
 useEffect(() => {
@@ -30,6 +35,7 @@ useEffect(() => {
                     <tr>
                         <th>Email</th>
                         <th>Nombre</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +43,10 @@ useEffect(() => {
                         <tr key={usuario.usuarioId}>
                             <td>{usuario.email}</td>
                             <td>{usuario.nombre}</td>
+                            <td>
+                                <button onClick={() => navigate(`/editar/${usuario.usuarioId}`)} className='btn btn-primary'>Editar</button>
+                                <button onClick={() => navigate(`/eliminar/${usuario.usuarioId}`)} className='btn btn-danger'>Eliminar</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

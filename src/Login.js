@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Registro() {
+function Login() {
   //Login Data
   const [email, setEmail] = useState("");
   const [clave, setClave] = useState("");
@@ -23,7 +23,6 @@ function Registro() {
     if(response.statusCode!=200){
       alert("El usuario no se ha registrado");
     }else{
-      localStorage.setItem("token", await response.token)
       alert("El usuario se ha registrado");
       //redireccionar a inicio
       window.location.href = "/";
@@ -41,33 +40,28 @@ function Registro() {
     e.preventDefault();
     const datos = { email: email, clave: clave };
     //POST localhost:3000/auth/login
-    await fetch("http://localhost:3000/auth/login", {
+    const response=await fetch("http://localhost:3000/auth/login", {
       method: "POST",
       body: JSON.stringify(datos),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then(async (response) =>
-      localStorage.setItem("token", await response.text())
-    );
+    }).then(async (response) => await response.json())
+    if(response.statusCode!=200){
+      alert("Error en los datos de autenticacion");
+    }else{
+      localStorage.setItem("token", await response.token)
+      alert("El usuario se ha autenticado");
+      //redireccionar a inicio
+      window.location.href = "/";
+    }	
   }
 
   return (
     <div className="container">
-      <h2>Registro de un nuevo usuario</h2>
-      <form id="LoginForm" onSubmit={FEnviar}>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
-            Nombre
-          </label>
-          <input
-            onChange={(e) => setNombre(e.target.value)}
-            value={nombre}
-            type="text"
-            class="form-control"
-            required
-          />
-        </div>
+      <h2>Autenticacion</h2>
+      <form id="LoginForm" onSubmit={FAutenticar}>
+       
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
             EMAIL
@@ -97,10 +91,10 @@ function Registro() {
         </div>
 
         <button type="submit" class="btn btn-primary">
-          Registrar
+          Login
         </button>
       </form>
     </div>
   );
 }
-export default Registro;
+export default Login;

@@ -1,11 +1,15 @@
 import React from 'react';
-import { NavLink  } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Link,
+} from 'react-router-dom';
 
 function Menu() {
   return (
+    
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <div className="container">
-      <NavLink  className="navbar-brand" to="/">Mi Aplicación</NavLink >
+      <Link  className="navbar-brand" to="/">Mi Aplicación</Link >
       <button
         className="navbar-toggler"
         type="button"
@@ -20,14 +24,20 @@ function Menu() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <NavLink exact className="nav-link" to="/"  activeClassName="active"> Inicio</NavLink >
+            <Link exact className="nav-link" to="/"  activeClassName="active"> Inicio</Link >
           </li>
+       
           <li className="nav-item">
-            <NavLink  className="nav-link" to="/listado"  activeClassName="active">Listado</NavLink >
+            <Link  className="nav-link" to="/registro"  activeClassName="active">Registro</Link >
           </li>
-          <li className="nav-item">
-            <NavLink  className="nav-link" to="/registro"  activeClassName="active">Registro</NavLink >
+          {!localStorage.getItem('token') && <li className="nav-item">
+            <Link  className="nav-link" to="/login"  activeClassName="active">Login</Link >
           </li>
+          }
+          {localStorage.getItem('token') && <li className="nav-item">
+            <Link  className="nav-link" to="/salir"  activeClassName="active">Salir</Link >
+          </li>
+          }
         </ul>
       </div>
     </div>

@@ -3,7 +3,9 @@ import React from 'react';
 import './App.css';
 import Menu from './Menu';
 import Inicio from './Inicio';
-import Servicios from './Servicios';
+import Listado from './Listado';
+import Registro from './Registro';
+import Editar from './Editar';
 function App() {
   return (
    <Router>
@@ -11,7 +13,9 @@ function App() {
     <Menu/>
      <Switch>
        <Route path="/" exact component={Inicio} />
-       <Route path="/servicios" component={Servicios} />
+       <Route path="/listado" component={Listado} />
+       <Route path="/registro" component={Registro} />
+       <Route path="/editar/:id" component={Editar} />
      </Switch>
     </div>
    </Router>

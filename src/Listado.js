@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Inicio from "./Inicio";
 
-function Servicios() {
+
+function Listado() {
 
   //Login Data
   const [email, setEmail] = useState('')
@@ -91,4 +91,4 @@ function FEnviar  () {
     </div>
   );
 }
-export default Servicios;
+export default Listado;

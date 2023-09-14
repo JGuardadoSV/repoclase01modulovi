@@ -23,7 +23,10 @@ function Menu() {
             <NavLink exact className="nav-link" to="/"  activeClassName="active"> Inicio</NavLink >
           </li>
           <li className="nav-item">
-            <NavLink  className="nav-link" to="/servicios"  activeClassName="active">Registrar</NavLink >
+            <NavLink  className="nav-link" to="/listado"  activeClassName="active">Listado</NavLink >
+          </li>
+          <li className="nav-item">
+            <NavLink  className="nav-link" to="/registro"  activeClassName="active">Registro</NavLink >
           </li>
         </ul>
       </div>

@@ -23,9 +23,9 @@ useEffect(() => {
   return (
     <div className='container'>
         <div>
-            <h1>Listado de usuarios</h1>
-            
-            <table className='table table-dark table-hover table-striped'>
+            <h1 >Listado de usuarios</h1>
+            { usuarios.length === 0 && <h3 className='text-center alert alert-danger'>No hay datos para mostrar</h3>}
+           { usuarios.length > 0 && <table className='table table-dark table-hover table-striped'>
                 <thead>
                     <tr>
                         <th>Email</th>
@@ -33,7 +33,7 @@ useEffect(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    {usuarios.map(usuario => (
+                    { usuarios.length > 0 && usuarios.map(usuario => (
                         <tr key={usuario.usuarioId}>
                             <td>{usuario.email}</td>
                             <td>{usuario.nombre}</td>
@@ -41,6 +41,7 @@ useEffect(() => {
                     ))}
                 </tbody>
             </table>
+                    }
         </div>
     </div>
   );

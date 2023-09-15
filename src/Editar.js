@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+
 export default function Editar() {
   const navigate = useNavigate();
 
@@ -10,8 +11,8 @@ export default function Editar() {
       navigate('/login');
   }
     const { id } = useParams();
+   
     const [usuario, setUsuario] = useState({});
-
     const [email, setEmail] = useState('')
     const [nombre, setNombre] = useState('')
     
